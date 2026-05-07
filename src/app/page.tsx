@@ -1,5 +1,8 @@
 "use client";
 
+import { StatusBar } from "@/components/StatusBar";
+import { Footer } from "@/components/Footer";
+
 import React, { useState } from 'react';
 import { dumFunService } from '@/lib/dumfun';
 
@@ -26,6 +29,8 @@ export default function Home() {
   };
 
   return (
+    <>
+      <StatusBar />
     <main className="min-h-screen p-4 md:p-8 flex flex-col items-center justify-center relative overflow-hidden bg-slate-950">
       {/* Swap Interface (Dummy) */}
       <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl z-10">
@@ -123,5 +128,7 @@ export default function Home() {
         </div>
       )}
     </main>
+      <Footer />
+    </>
   );
 }
