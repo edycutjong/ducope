@@ -2,27 +2,35 @@
 
 import { StatusBar } from "@/components/StatusBar";
 import { Footer } from "@/components/Footer";
+import { ErrorMemeCard } from "@/components/ErrorMemeCard";
+import { HeroLanding } from "@/components/HeroLanding";
 
 import React, { useState } from 'react';
-import { dumFunService } from '@/lib/dumfun';
+import { dumFunSDK } from '@/lib/dumfun-sdk';
+import { ErrorHandler } from '@/lib/error-handler';
 
 export default function Home() {
   const [isSwapping, setIsSwapping] = useState(false);
   const [swapFailed, setSwapFailed] = useState(false);
   const [showMeme, setShowMeme] = useState(false);
   const [tokenInfo, setTokenInfo] = useState({ ticker: "$REKT_SLIPPAGE", address: "Ducope9xN...kL7p" });
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSwap = () => {
     setIsSwapping(true);
     setSwapFailed(false);
     setShowMeme(false);
+    setErrorMessage("");
 
     // Simulate swap failure after 1.5 seconds
     setTimeout(async () => {
       setIsSwapping(false);
       setSwapFailed(true);
       
-      const newToken = await dumFunService.deployCopeToken("slippage");
+      const { message, reason } = ErrorHandler.handle("Swap failed: Slippage tolerance exceeded");
+      setErrorMessage(message);
+
+      const newToken = await dumFunSDK.createToken(reason);
       setTokenInfo(newToken);
       setShowMeme(true);
     }, 1500);
@@ -31,9 +39,20 @@ export default function Home() {
   return (
     <>
       <StatusBar />
-    <main className="min-h-screen p-4 md:p-8 flex flex-col items-center justify-center relative overflow-hidden bg-slate-950">
-      {/* Swap Interface (Dummy) */}
-      <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl z-10">
+      <main className="min-h-screen relative overflow-hidden bg-slate-950">
+        
+        <HeroLanding />
+
+        {/* Demo Section */}
+        <section id="demo-section" className="py-24 px-4 md:px-8 flex flex-col items-center justify-center relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-white mb-4">See It In Action</h2>
+            <p className="text-slate-400 max-w-xl mx-auto">Try a swap with high slippage to see how Ducope intercepts the transaction and creates a new token instantly.</p>
+          </div>
+
+          {/* Swap Interface (Dummy) */}
+          <div className="w-full max-w-md bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 shadow-2xl relative">
+            <div className="absolute -inset-1 bg-linear-to-r from-yellow-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-50 -z-10" />
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold text-white">Swap</h2>
           <span className="text-slate-400">⚙️</span>
@@ -86,46 +105,17 @@ export default function Home() {
               : 'bg-yellow-500 hover:bg-yellow-400 text-slate-950'
           }`}
         >
-          {isSwapping ? 'Swapping...' : swapFailed ? 'Swap Failed: Slippage Exceeded' : 'Swap'}
+          {isSwapping ? 'Swapping...' : swapFailed ? errorMessage || 'Swap Failed' : 'Swap'}
         </button>
       </div>
+      </section>
 
       {/* The Ducope Meme Toast / Modal */}
       {showMeme && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-slate-900 border-2 border-yellow-500 rounded-3xl p-8 max-w-md w-full shadow-[0_0_50px_rgba(234,179,8,0.2)] text-center relative animate-in slide-in-from-bottom-10 duration-500">
-            <button 
-              onClick={() => { setSwapFailed(false); setShowMeme(false); }}
-              className="absolute top-4 right-4 text-slate-500 hover:text-white"
-            >
-              ✕
-            </button>
-            <div className="text-6xl mb-4">🤡</div>
-            <h2 className="text-2xl font-black text-white mb-2 uppercase italic tracking-wider">
-              Swap failed? Let's cope.
-            </h2>
-            <p className="text-slate-400 mb-6 font-mono text-sm">
-              We just deployed a meme token on <span className="text-yellow-500">Dum.fun</span> for your pain.
-            </p>
-            
-            <div className="bg-slate-950 rounded-2xl p-4 border border-slate-800 text-left mb-6 font-mono">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 bg-red-500 rounded flex items-center justify-center text-xl">📉</div>
-                <div>
-                  <div className="text-white font-bold">{tokenInfo.ticker}</div>
-                  <div className="text-xs text-slate-500">Market Cap: $0.00</div>
-                </div>
-              </div>
-              <div className="text-xs text-slate-400 mt-3 break-all">
-                CA: {tokenInfo.address}
-              </div>
-            </div>
-
-            <button className="w-full bg-yellow-500 text-slate-950 font-black py-3 rounded-xl hover:bg-yellow-400 transition-colors uppercase tracking-widest">
-              View on Dum.fun
-            </button>
-          </div>
-        </div>
+        <ErrorMemeCard 
+          tokenInfo={tokenInfo} 
+          onClose={() => { setSwapFailed(false); setShowMeme(false); }} 
+        />
       )}
     </main>
       <Footer />
