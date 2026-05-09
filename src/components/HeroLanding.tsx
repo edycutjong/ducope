@@ -34,7 +34,7 @@ export function HeroLanding() {
         >
           Failed Swap? <br />
           <span className="text-transparent bg-clip-text bg-linear-to-r from-yellow-400 to-yellow-600">
-            You're Now a Founder.
+            You&apos;re Now a Founder.
           </span>
         </motion.h1>
 
@@ -44,7 +44,7 @@ export function HeroLanding() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg md:text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed"
         >
-          Don't let slippage ruin your day. Ducope intercepts your failed transactions
+          Don&apos;t let slippage ruin your day. Ducope intercepts your failed transactions
           and instantly mints a shiny new meme token. Turn your losses into liquidity.
         </motion.p>
 

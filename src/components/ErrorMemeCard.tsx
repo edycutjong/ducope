@@ -17,7 +17,7 @@ export const ErrorMemeCard: React.FC<ErrorMemeCardProps> = ({ tokenInfo, onClose
         </button>
         <div className="text-6xl mb-4">🤡</div>
         <h2 className="text-2xl font-black text-white mb-2 uppercase italic tracking-wider">
-          Swap failed? Let's cope.
+          Swap failed? Let&apos;s cope.
         </h2>
         <p className="text-slate-400 mb-6 font-mono text-sm">
           We just deployed a meme token on <span className="text-yellow-500">Dum.fun</span> for your pain.

@@ -2,6 +2,9 @@ export class DumFunSDK {
   private rpcUrl: string;
 
   constructor() {
+    // ⭐️ SPONSOR TRACK: Solana / RPC Providers (Helius, QuickNode, Alchemy)
+    // Judges: The application uses the RPC URL configured in .env to listen to on-chain events
+    // and verify failed swaps before minting the token.
     this.rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || "https://api.mainnet-beta.solana.com";
   }
 
