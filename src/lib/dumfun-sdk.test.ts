@@ -62,4 +62,43 @@ describe('DumFunSDK', () => {
     warnSpy.mockRestore();
     logSpy.mockRestore();
   });
+
+  it('asyncMintToken should catch errors from createToken and return null', async () => {
+    const sdk = new DumFunSDK();
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => { });
+    const createTokenSpy = vi.spyOn(sdk, 'createToken').mockRejectedValue(new Error('Simulated failure'));
+
+    const result = await sdk.asyncMintToken({ wallet: 'wallet-error', error: 'some_error' });
+
+    expect(result).toBeNull();
+    expect(errorSpy).toHaveBeenCalled();
+    expect(createTokenSpy).toHaveBeenCalled();
+
+    errorSpy.mockRestore();
+    createTokenSpy.mockRestore();
+  });
+
+  it('asyncMintToken should handle object errors with message', async () => {
+    const sdk = new DumFunSDK();
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => { });
+    const createTokenSpy = vi.spyOn(sdk, 'createToken');
+
+    await sdk.asyncMintToken({ wallet: 'wallet-obj-error', error: { message: 'object_error_message' } });
+    
+    expect(createTokenSpy).toHaveBeenCalledWith('object_error_message');
+
+    logSpy.mockRestore();
+  });
+
+  it('asyncMintToken should handle object errors without message', async () => {
+    const sdk = new DumFunSDK();
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => { });
+    const createTokenSpy = vi.spyOn(sdk, 'createToken');
+
+    await sdk.asyncMintToken({ wallet: 'wallet-unknown-error', error: {} });
+    
+    expect(createTokenSpy).toHaveBeenCalledWith('unknown');
+
+    logSpy.mockRestore();
+  });
 });
