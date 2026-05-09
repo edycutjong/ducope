@@ -1,4 +1,4 @@
-# Ducope — Technical Architecture
+# Ducope — Technical Architecture (V2 Production)
 
 ## System Architecture
 
@@ -6,14 +6,17 @@
 graph TB
     subgraph Primary["Primary Project Error Handler"]
         A[try/catch] --> B{Error?}
-        B -->|Yes| C[Dum.fun SDK]
+        B -->|Yes| C[Error Sanitizer]
         B -->|No| D[Normal Flow]
     end
 
     subgraph DumFun["Dum.fun SDK"]
-        C --> E[createToken]
-        E --> F[Meme Token Minted]
-        F --> G[Display Card]
+        C --> E{Rate Limiter}
+        E -->|Allowed| F[asyncMintToken]
+        E -->|Blocked| H[Drop Request]
+        F -.- I[Background Process]
+        I --> J[Meme Token Minted]
+        J --> K[Update UI Card]
     end
 ```
 
@@ -21,7 +24,9 @@ graph TB
 
 | Feature | Use Case | Depth |
 |---|---|---|
-| **createToken()** | Mint meme token on error | 🟢 Core |
+| **asyncMintToken()** | Mint meme token async on error | 🟢 Core |
+| **ErrorHandler** | Scrub sensitive data from errors | 🟢 Core |
+| **RateLimiter** | Prevent wallet/error spamming | 🟢 Core |
 
 ## Implementation (15 min)
 
@@ -30,11 +35,17 @@ graph TB
 try {
     await executeSwap(params);
 } catch (err) {
-    const cope = await dumfun.createToken({
-        name: "REKT",
-        description: `Swap failed: ${err.message}`,
-        image: generateMemeImage(err)
-    });
-    showToast(`Minted $REKT — you're now a founder!`);
+    // 1. Instantly feedback to user
+    showToast(`Swap failed. Minting your $REKT cope token in background...`);
+    
+    // 2. Mint token asynchronously (non-blocking)
+    dumfun.asyncMintToken({
+        wallet: userWallet.address,
+        error: err
+    }).then(cope => {
+        if (cope) {
+            updateToast(`Minted ${cope.ticker}! You're now a founder!`);
+        }
+    }).catch(console.error);
 }
 ```

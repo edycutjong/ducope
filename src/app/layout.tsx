@@ -67,8 +67,9 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} dark antialiased`}
       style={{ colorScheme: "dark" }}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">{children}</body>
+      <body className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans" suppressHydrationWarning>{children}</body>
     </html>
   );
 }

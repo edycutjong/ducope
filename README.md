@@ -27,7 +27,7 @@
 *(Demo GIF and UI screenshots can be found in the `docs/assets` directory)*
 
 <div align="center">
-  <img src="docs/assets/og-image.png" alt="App Demo" width="800">
+  <img src="docs/assets/og-image.png" alt="App Demo" width="100%">
 </div>
 
 ## 💡 The Problem & Solution
@@ -40,16 +40,17 @@ In the chaotic world of meme coin trading, failed transactions due to high slipp
 - 🎨 **Intuitive UX:** Beautiful, user-centric interface built for scale.
 
 ## 🏗️ Architecture & Tech Stack
-We built the frontend using **Next.js 16** and **Tailwind CSS v4**. The application utilizes Web3 SDKs to handle wallet connections and smart contract interactions securely.
 
-```mermaid
-graph TD
-    A[User Wallet] -->|Input| B(Next.js App Router)
-    B -->|Execute| C{SDK Integration}
-    C -->|Return Result| D[Core Logic]
-    D -->|Process| E{Validation & Settlement}
-    E -->|Final State| F[Dashboard UI]
-```
+### Tech Stack
+| Component | Technology | Description |
+|-----------|------------|-------------|
+| **Frontend** | Next.js 16, React 19 | App Router, SSR, Server Components |
+| **Styling** | Tailwind CSS v4, Framer Motion | High-performance responsive UI & animations |
+| **Language** | TypeScript | Strict type safety across the stack |
+| **Blockchain** | Solana | Fast, low-cost meme token minting |
+| **Testing** | Vitest | Comprehensive unit and component testing |
+
+For a detailed breakdown of our system architecture and data flow, please refer to the [Architecture Document](docs/ARCHITECTURE.md).
 
 ## 🏆 Sponsor Tracks Targeted
 * **Web3 SDK Integration**: We used standard Web3 Tooling to handle wallet connection and transaction lifecycle. The implementation can be found in our core app logic.
@@ -57,7 +58,7 @@ graph TD
 
 ## 🚀 Run it Locally (For Judges)
 
-1. **Clone the repo:** `git clone https://github.com/edycutjong/frontier-dumfun.git`
+1. **Clone the repo:** `git clone https://github.com/edycutjong/ducope.git`
 2. **Install dependencies:** `npm install`
 3. **Set up environment variables:** Rename `.env.example` to `.env.local` and add your keys.
 4. **Run the app:** `npm run dev`
@@ -66,3 +67,9 @@ graph TD
 > You can skip importing a real wallet! Use our built-in test credentials to test the flow instantly:
 > **Test Account:** `judge@hackathon.com` | **Password:** `hackathon2026`
 > Alternatively, connect any burner wallet on a supported Testnet.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).

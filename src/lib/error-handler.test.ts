@@ -39,4 +39,28 @@ describe('ErrorHandler', () => {
     
     consoleSpy.mockRestore();
   });
+
+  it('should sanitize stack traces and internal paths', () => {
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const maliciousError = new Error('Swap failed\n    at Object.<anonymous> (/Users/edycu/Projects/Hackathon/Frontier/frontier-dumfun/src/lib/dumfun-sdk.ts:15:10)\n    at Module._compile (node:internal/modules/cjs/loader:1254:14)');
+    
+    const result = ErrorHandler.handle(maliciousError);
+    
+    expect(result.message).not.toContain('/Users/');
+    expect(result.message).not.toContain('at Object');
+    expect(result.message).toBe('Swap failed');
+    
+    consoleSpy.mockRestore();
+  });
+
+  it('should truncate overly long error messages', () => {
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const longError = new Error('A'.repeat(500));
+    const result = ErrorHandler.handle(longError);
+    
+    expect(result.message.length).toBe(203); // 200 + '...'
+    expect(result.message.endsWith('...')).toBe(true);
+    
+    consoleSpy.mockRestore();
+  });
 });
