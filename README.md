@@ -1,14 +1,14 @@
 <div align="center">
   <h1>Ducope 🚀</h1>
   <p><em>Empowering Web3 traders to turn failed swaps into new meme coins instantly.</em></p>
-  <img src="docs/assets/readme-hero.png" alt="Ducope Hero" width="100%">
+  <img src="docs/readme-hero.png" alt="Ducope Hero" width="100%">
   
   <br/>
   
-  [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://ducope.edycu.dev)
-  [![Pitch Video](https://img.shields.io/badge/Pitch-Video-red.svg)](https://youtube.com/your-video)
-  [![Pitch Deck](https://img.shields.io/badge/Pitch-Deck-f59e0b.svg)](https://ducope.edycu.dev/pitch)
-  [![Superteam Frontier](https://img.shields.io/badge/Superteam-Frontier_Hackathon-1E40AF?style=flat&logo=solana&logoColor=white)](https://superteam.fun/earn/listing/dumdotfun)
+  [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg?style=for-the-badge)](https://ducope.edycu.dev)
+  [![Pitch Video](https://img.shields.io/badge/Pitch-Video-red.svg?style=for-the-badge)](https://youtube.com/your-video)
+  [![Pitch Deck](https://img.shields.io/badge/Pitch-Deck-f59e0b.svg?style=for-the-badge)](https://ducope.edycu.dev/pitch)
+  [![Superteam Frontier](https://img.shields.io/badge/Superteam-Frontier_Hackathon-1E40AF?style=for-the-badge&logo=solana&logoColor=white)](https://superteam.fun/earn/listing/dumdotfun)
 
   <br/>
 
@@ -18,7 +18,7 @@
   ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)
   ![Solana](https://img.shields.io/badge/Solana-14F195?style=flat&logo=solana&logoColor=black)
   ![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=flat&logo=framer&logoColor=white)
-  ![Vitest](https://img.shields.io/badge/Vitest-FCC72B?style=flat&logo=vitest&logoColor=white)
+  [![Ducope CI](https://github.com/edycutjong/ducope/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/ducope/actions/workflows/ci.yml)
 </div>
 
 ---
@@ -27,7 +27,7 @@
 *(Demo GIF and UI screenshots can be found in the `docs/assets` directory)*
 
 <div align="center">
-  <img src="docs/assets/og-image.png" alt="App Demo" width="100%">
+  <img src="public/og-image.png" alt="App Demo" width="100%">
 </div>
 
 ## 💡 The Problem & Solution
