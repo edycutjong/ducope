@@ -6,7 +6,7 @@
   <br/>
   
   [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg?style=for-the-badge)](https://ducope.edycu.dev)
-  [![Pitch Video](https://img.shields.io/badge/Pitch-Video-red.svg?style=for-the-badge)](https://youtube.com/your-video)
+  [![Pitch Video](https://img.shields.io/badge/Pitch-Video-red.svg?style=for-the-badge)](https://youtu.be/m6wcbRwVBmQ)
   [![Pitch Deck](https://img.shields.io/badge/Pitch-Deck-f59e0b.svg?style=for-the-badge)](https://ducope.edycu.dev/pitch)
   [![Superteam Frontier](https://img.shields.io/badge/Superteam-Frontier_Hackathon-1E40AF?style=for-the-badge&logo=solana&logoColor=white)](https://superteam.fun/earn/listing/dumdotfun)
 
