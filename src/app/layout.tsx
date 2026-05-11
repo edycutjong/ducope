@@ -21,6 +21,14 @@ export const metadata: Metadata = {
     description: "When your swap fails, we mint a meme token for you.",
     url: "https://ducope.edycu.dev",
     siteName: "Ducope",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Ducope | Dum.fun",
+      },
+    ],
     locale: "en_US",
     type: "website",
   },
@@ -28,6 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Ducope | Dum.fun",
     description: "When your swap fails, we mint a meme token for you.",
+    images: ["/og-image.png"],
   },
 };
 
